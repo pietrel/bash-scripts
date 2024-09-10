@@ -8,8 +8,7 @@ fi
 input_image=$1
 rows=$2    
 columns=$3 
-output_prefix=$4
-result_dir=$5
+result_dir=$4
 
 mkdir -p "$result_dir"
 
@@ -28,8 +27,8 @@ new_height=$((slice_size * rows))
 
 echo "resize image to ${new_width}x${new_height} to fit ${rows}x${columns} square slices of size ${slice_size}x${slice_size}"
 
-magick convert "$input_image" -resize ${new_width}x${new_height}^ -gravity center -extent ${new_width}x${new_height} "${result_dir}/resized_image.png"
+magick "$input_image" -resize ${new_width}x${new_height}^ -gravity center -extent ${new_width}x${new_height} "${result_dir}/resized_image.png"
 
-magick convert "${result_dir}/resized_image.png" -crop ${slice_size}x${slice_size} +repage +adjoin "${result_dir}/result_%d.png"
+magick "${result_dir}/resized_image.png" -crop ${slice_size}x${slice_size} +repage +adjoin "${result_dir}/result_%d.png"
 
-echo "image successfully resized and sliced"
+echo "image successfully resized and split"
