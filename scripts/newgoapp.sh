@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/bash
+#!/bin/bash
 
 COMMAND=$1
 APP_NAME=${2,,}
